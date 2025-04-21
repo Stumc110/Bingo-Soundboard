@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>My Soundboard</title>
+ <style>
+   body {
+     font-family: Arial, sans-serif;
+     background-color: #111;
+     color: white;
+     text-align: center;
+     padding-top: 50px;
+   }
+   button {
+     margin: 10px;
+     padding: 15px 30px;
+     font-size: 18px;
+     background-color: #007bff;
+     color: white;
+     border: none;
+     border-radius: 8px;
+     cursor: pointer;
+     transition: background-color 0.3s ease;
+   }
+   button:hover {
+     background-color: #0056b3;
+   }
+   .fade-button {
+     background-color: #dc3545;
+   }
+   .fade-button:hover {
+     background-color: #a71d2a;
+   }
+ </style>
+</head>
+<body>
+ <h1>My Custom Soundboard</h1>
+
+ <button onclick="document.getElementById('quack').play()">Quack</button>
+ <button onclick="document.getElementById('bingo').play()">Bingo</button>
+ <button onclick="document.getElementById('whistle').play()">Whistle</button>
+ <button onclick="document.getElementById('MBbingo').play()">MBbingo</button>
+ <button onclick="document.getElementById('bingobanga').play()">Bingo Banga</button>
+ <button onclick="document.getElementById('bingosong').play()">Bingo Song</button>
+ <button class="fade-button" onclick="fadeOutAll()">Fade Out</button>
+
+ <audio id="quack" src="quack.mov"></audio>
+ <audio id="bingo" src="bingo.mov"></audio>
+ <audio id="whistle" src="whistle.mp4"></audio>
+ <audio id="MBbingo" src="MBbingo.mov"></audio>
+ <audio id="bingobanga" src="bingobanga.mp4"></audio>
+ <audio id="bingosong" src="bingosong.mov"></audio>
+
+ <script>
+   const sounds = [
+     document.getElementById('quack'),
+     document.getElementById('bingo'),
+     document.getElementById('whistle'),
+     document.getElementById('MBbingo'),
+     document.getElementById('bingobanga'),
+     document.getElementById('bingosong')
+   ];
+
+   function fadeOut(audio) {
+     if (!audio || audio.paused) return;
+     let fadeAudio = setInterval(() => {
+       if (audio.volume > 0.05) {
+         audio.volume -= 0.05;
+       } else {
+         audio.volume = 1.0;
+         audio.pause();
+         audio.currentTime = 0;
+         clearInterval(fadeAudio);
+       }
+     }, 100);
+   }
+
+   function fadeOutAll() {
+     sounds.forEach(fadeOut);
+   }
+ </script>
+</body>
+</html>
